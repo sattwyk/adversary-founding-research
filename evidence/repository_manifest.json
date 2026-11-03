@@ -1,0 +1,103 @@
+[
+  {
+    "name": "redb",
+    "repo": "cberner/redb",
+    "sha": "edbbbe3aef08f8ab45786ba7442247d8fd7dfae7",
+    "seconds": 8.29
+  },
+  {
+    "name": "bbolt",
+    "repo": "etcd-io/bbolt",
+    "sha": "a4ef19710eb7ddc41fd1155336baf331b5c57ba8",
+    "seconds": 8.96
+  },
+  {
+    "name": "gosim",
+    "repo": "jellevandenhooff/gosim",
+    "sha": "ffd3a613542675755e4cbf8186b5edaf404ed95c",
+    "seconds": 8.17
+  },
+  {
+    "name": "turmoil",
+    "repo": "tokio-rs/turmoil",
+    "sha": "6a1f50223b5a1884bf8890053c85eec04a8af267",
+    "seconds": 7.46
+  },
+  {
+    "name": "madsim",
+    "repo": "madsim-rs/madsim",
+    "sha": "519950efb4711464f300ed7edf2967ed62d5f502",
+    "seconds": 9.47
+  },
+  {
+    "name": "shuttle",
+    "repo": "awslabs/shuttle",
+    "sha": "c98a83644919ad94c0e45be9ec4d72a5c2bfecaa",
+    "seconds": 10.63
+  },
+  {
+    "name": "loom",
+    "repo": "tokio-rs/loom",
+    "sha": "948c8cc78b178ede6eeff3afc7d97f2f4ea08559",
+    "seconds": 4.44
+  },
+  {
+    "name": "stateright",
+    "repo": "stateright/stateright",
+    "sha": "ab8c8be9341505e0f71edbe5dd88ed275bd976a4",
+    "seconds": 4.76
+  },
+  {
+    "name": "porcupine",
+    "repo": "anishathalye/porcupine",
+    "sha": "97cd067defd99df172053ba7f4ca5bbae57fe446",
+    "seconds": 4.95
+  },
+  {
+    "name": "elle",
+    "repo": "jepsen-io/elle",
+    "sha": "4e359e597c52938b0afebb8bc42273914d68a424",
+    "seconds": 9.72
+  },
+  {
+    "name": "jepsen",
+    "repo": "jepsen-io/jepsen",
+    "sha": "08e3e33964808876c2c9bbe4f3f9f948295a108e",
+    "seconds": 10.09
+  },
+  {
+    "name": "foundationdb",
+    "repo": "apple/foundationdb",
+    "sha": "8ddaf495d9eb5efe101a7554547bd51df3504e10",
+    "seconds": 19.15
+  },
+  {
+    "name": "tigerbeetle",
+    "repo": "tigerbeetle/tigerbeetle",
+    "sha": "0450c32b2c3c3ab6114f3402cc601341cc8192aa",
+    "seconds": 12.56
+  },
+  {
+    "name": "etcd",
+    "repo": "etcd-io/etcd",
+    "sha": "4b0b745025716b893c64dbee443e3f969931a16b",
+    "seconds": 15.86
+  },
+  {
+    "name": "risingwave",
+    "repo": "risingwavelabs/risingwave",
+    "sha": "f5a3e57a60263595a950678c5c5566dbd5dc3166",
+    "seconds": 21.3
+  },
+  {
+    "name": "kani",
+    "repo": "model-checking/kani",
+    "sha": "c5e65fdfc3e15ec32293f2a4c07509aebec033c9",
+    "seconds": 17.65
+  },
+  {
+    "name": "faultbox",
+    "repo": "faultbox/Faultbox",
+    "sha": "9ed11f9b90036904c069a4e82e04503e56842f51"
+  }
+]

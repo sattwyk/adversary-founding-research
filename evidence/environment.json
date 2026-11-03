@@ -1,0 +1,21 @@
+{
+  "commands": {
+    "rustc --version": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+    "cargo --version": "cargo 1.97.1 (c980f4866 2026-06-30)",
+    "go version": "go version go1.26.4-X:nodwarf5 linux/amd64",
+    "python3 --version": "Python 3.14.5",
+    "strace --version": "strace -- version 7.0\nCopyright (c) 1991-2026 The strace developers <https://strace.io>.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\nOptional features enabled: stack-trace=libunwind stack-demangle m32-mpers mx32-mpers",
+    "uname -a": "Linux SattysPC 6.18.54.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026 x86_64 GNU/Linux"
+  },
+  "binaries": {
+    "rust": {
+      "sha256": "d8bbd2c060484fe92660ca76d043bd223974af64a200593a715f7e35e8fab6f8"
+    },
+    "go": {
+      "sha256": "03ec1a46bd85ba93fbabe0a647149f6dad9306a19a16974b69155e0d881fb9d0"
+    },
+    "faultbox": {
+      "sha256": "d9ab4ec6343ddf6d3b432ce38bc02c23d8c2c21ebe9fac8712caafbf59a3b61e"
+    }
+  }
+}

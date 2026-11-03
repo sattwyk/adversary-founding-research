@@ -1,0 +1,2 @@
+2026/11/03 10:43:48 ERROR missing function body pkg=internal/runtime/syscall/linux name=Syscall6
+exit status 1

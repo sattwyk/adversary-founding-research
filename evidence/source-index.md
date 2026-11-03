@@ -1,0 +1,44 @@
+# Source index
+
+Reviewed 3 November 2026. Exact repository revisions are in repository_manifest.json. The research report states scope and limitations.
+
+- [foundationdb/fdbrpc/sim2.cpp](https://github.com/apple/foundationdb/blob/8ddaf495d9eb5efe101a7554547bd51df3504e10/fdbrpc/sim2.cpp#L845) — source-inspected
+- [tigerbeetle/src/testing/storage.zig](https://github.com/tigerbeetle/tigerbeetle/blob/0450c32b2c3c3ab6114f3402cc601341cc8192aa/src/testing/storage.zig#L79) — source-inspected
+- [etcd/tests/robustness/validate/validate.go](https://github.com/etcd-io/etcd/blob/4b0b745025716b893c64dbee443e3f969931a16b/tests/robustness/validate/validate.go#L32) — source-inspected
+- [etcd/tests/robustness/validate/patch_history.go](https://github.com/etcd-io/etcd/blob/4b0b745025716b893c64dbee443e3f969931a16b/tests/robustness/validate/patch_history.go#L34) — source-inspected
+- [turmoil/crates/turmoil/src/host.rs](https://github.com/tokio-rs/turmoil/blob/6a1f50223b5a1884bf8890053c85eec04a8af267/crates/turmoil/src/host.rs#L185) — source-inspected
+- [turmoil/crates/turmoil-fs/src/lib.rs](https://github.com/tokio-rs/turmoil/blob/6a1f50223b5a1884bf8890053c85eec04a8af267/crates/turmoil-fs/src/lib.rs#L1104) — source-inspected
+- [madsim/madsim/src/sim/fs.rs](https://github.com/madsim-rs/madsim/blob/519950efb4711464f300ed7edf2967ed62d5f502/madsim/src/sim/fs.rs#L51) — source-inspected
+- [risingwave/src/tests/simulation/src/cluster.rs](https://github.com/risingwavelabs/risingwave/blob/f5a3e57a60263595a950678c5c5566dbd5dc3166/src/tests/simulation/src/cluster.rs#L403) — source-inspected
+- [shuttle/shuttle-engine/src/scheduler/mod.rs](https://github.com/awslabs/shuttle/blob/c98a83644919ad94c0e45be9ec4d72a5c2bfecaa/shuttle-engine/src/scheduler/mod.rs#L75) — source-inspected
+- [loom/src/rt/execution.rs](https://github.com/tokio-rs/loom/blob/948c8cc78b178ede6eeff3afc7d97f2f4ea08559/src/rt/execution.rs#L51) — source-inspected
+- [gosim/internal/translate/go.go](https://github.com/jellevandenhooff/gosim/blob/ffd3a613542675755e4cbf8186b5edaf404ed95c/internal/translate/go.go#L1) — source-inspected
+- [gosim/internal/simulation/fs/filesystem.go](https://github.com/jellevandenhooff/gosim/blob/ffd3a613542675755e4cbf8186b5edaf404ed95c/internal/simulation/fs/filesystem.go#L21) — source-inspected
+- [gosim/internal/simulation/fs/pendingops.go](https://github.com/jellevandenhooff/gosim/blob/ffd3a613542675755e4cbf8186b5edaf404ed95c/internal/simulation/fs/pendingops.go#L42) — source-inspected
+- [stateright/src/lib.rs](https://github.com/stateright/stateright/blob/ab8c8be9341505e0f71edbe5dd88ed275bd976a4/src/lib.rs#L158) — source-inspected
+- [kani/library/kani/src/lib.rs](https://github.com/model-checking/kani/blob/c5e65fdfc3e15ec32293f2a4c07509aebec033c9/library/kani/src/lib.rs#L1) — source-inspected
+- [porcupine/model.go](https://github.com/anishathalye/porcupine/blob/97cd067defd99df172053ba7f4ca5bbae57fe446/model.go#L19) — source-inspected
+- [elle/src/elle/core.clj](https://github.com/jepsen-io/elle/blob/4e359e597c52938b0afebb8bc42273914d68a424/src/elle/core.clj#L519) — source-inspected
+- [jepsen/jepsen/src/jepsen/core.clj](https://github.com/jepsen-io/jepsen/blob/08e3e33964808876c2c9bbe4f3f9f948295a108e/jepsen/src/jepsen/core.clj#L352) — source-inspected
+- [redb/src/db.rs](https://github.com/cberner/redb/blob/edbbbe3aef08f8ab45786ba7442247d8fd7dfae7/src/db.rs#L72) — source-inspected
+- [bbolt/tx.go](https://github.com/etcd-io/bbolt/blob/a4ef19710eb7ddc41fd1155336baf331b5c57ba8/tx.go#L520) — source-inspected
+- [faultbox/internal/engine/session.go](https://github.com/faultbox/Faultbox/blob/9ed11f9b90036904c069a4e82e04503e56842f51/internal/engine/session.go#L344) — source-inspected
+- [FoundationDB paper](https://www.foundationdb.org/files/fdb-paper.pdf) — primary-documentation-or-paper
+- [TigerBeetle protocol-aware DST](https://tigerbeetle.com/blog/2026-08-20-protocol-aware-dst) — primary-documentation-or-paper
+- [WarpStream engineering account](https://www.warpstream.com/blog/deterministic-simulation-testing-for-our-entire-saas) — primary-documentation-or-paper
+- [Antithesis founder offer](https://antithesis.com/blog/2025/antithesis_for_founders/) — primary-documentation-or-paper
+- [Antithesis product](https://antithesis.com/product/) — primary-documentation-or-paper
+- [Workers IO faults](https://workers.io/docs/fault-models) — primary-documentation-or-paper
+- [Workers IO pricing](https://workers.io/pricing/) — primary-documentation-or-paper
+- [Faultbox determinism](https://github.com/faultbox/Faultbox/blob/9ed11f9b90036904c069a4e82e04503e56842f51/docs/determinism.md) — primary-documentation-or-paper
+- [Go synctest](https://pkg.go.dev/testing/synctest) — primary-documentation-or-paper
+- [Jepsen analyses](https://jepsen.io/analyses) — primary-documentation-or-paper
+- [ALICE/BOB](https://www.usenix.org/system/files/conference/osdi14/osdi14-paper-pillai.pdf) — primary-documentation-or-paper
+- [Ferrite](https://dl.acm.org/doi/10.1145/2980024.2872406) — primary-documentation-or-paper
+- [CrashMonkey/ACE paper](https://www.usenix.org/conference/osdi18/presentation/mohan) — primary-documentation-or-paper
+- [ACE code/workload docs](https://github.com/utsaslab/crashmonkey/blob/master/docs/Ace.md) — primary-documentation-or-paper
+- [Pathfinder](https://dl.acm.org/doi/full/10.1145/3720431) — primary-documentation-or-paper
+- [DPOR](https://users.soe.ucsc.edu/~cormac/papers/popl05.pdf) — primary-documentation-or-paper
+- [Optimal DPOR](https://dl.acm.org/doi/10.1145/2535838.2535845) — primary-documentation-or-paper
+- [Kernel block replay](https://docs.kernel.org/admin-guide/device-mapper/log-writes.html) — primary-documentation-or-paper
+- [Wasmtime/WASI](https://docs.wasmtime.dev/) — primary-documentation-or-paper

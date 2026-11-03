@@ -1,0 +1,46 @@
+=== RUN   TestAdversaryDurability (seed 1)
+=== RUN   TestAdversaryDurability/unsafe=false (seed 1)
+    1 machine-2/7 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=false recovered=(1,1) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=false (0.00s simulated)
+=== RUN   TestAdversaryDurability/unsafe=true (seed 1)
+    2 machine-3/10 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=true recovered=(0,0) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=true (0.00s simulated)
+--- PASS: TestAdversaryDurability (0.00s simulated)
+=== RUN   TestAdversaryDurability (seed 2)
+=== RUN   TestAdversaryDurability/unsafe=false (seed 2)
+    1 machine-2/7 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=false recovered=(1,1) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=false (0.00s simulated)
+=== RUN   TestAdversaryDurability/unsafe=true (seed 2)
+    2 machine-3/10 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=true recovered=(0,0) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=true (0.00s simulated)
+--- PASS: TestAdversaryDurability (0.00s simulated)
+=== RUN   TestAdversaryDurability (seed 3)
+=== RUN   TestAdversaryDurability/unsafe=false (seed 3)
+    1 machine-2/7 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=false recovered=(1,1) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=false (0.00s simulated)
+=== RUN   TestAdversaryDurability/unsafe=true (seed 3)
+    2 machine-3/10 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=true recovered=(0,0) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=true (0.00s simulated)
+--- PASS: TestAdversaryDurability (0.00s simulated)
+=== RUN   TestAdversaryDurability (seed 4)
+=== RUN   TestAdversaryDurability/unsafe=false (seed 4)
+    1 machine-2/7 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=false recovered=(1,1) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=false (0.00s simulated)
+=== RUN   TestAdversaryDurability/unsafe=true (seed 4)
+    2 machine-3/10 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=true recovered=(0,0) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=true (0.00s simulated)
+--- PASS: TestAdversaryDurability (0.00s simulated)
+=== RUN   TestAdversaryDurability (seed 5)
+=== RUN   TestAdversaryDurability/unsafe=false (seed 5)
+    1 machine-2/7 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=false recovered=(1,1) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=false (0.00s simulated)
+=== RUN   TestAdversaryDurability/unsafe=true (seed 5)
+    2 machine-3/10 [90m14:10:03.000[0m [32mINF[0m [90mbolt/adversary_test.go:76[0m[36m >[0m unsafe=true recovered=(0,0) [36mmethod=[0mt.Logf
+--- PASS: TestAdversaryDurability/unsafe=true (0.00s simulated)
+--- PASS: TestAdversaryDurability (0.00s simulated)
+ok  	translated/github.com/jellevandenhooff/gosim/examples/bolt	0.018s
+# github.com/mattn/go-sqlite3
+sqlite3-binding.c: In function ‘sqlite3ShadowTableName’:
+sqlite3-binding.c:123934:9: warning: assignment discards ‘const’ qualifier from pointer target type [-Wdiscarded-qualifiers]
+123934 |   zTail = strrchr(zName, '_');
+       |         ^

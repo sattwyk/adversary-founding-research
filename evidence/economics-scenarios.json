@@ -1,0 +1,62 @@
+{
+  "assumptions": {
+    "compute_per_vcpu_hour": 0.05,
+    "support_per_hour": 125,
+    "currency": "USD",
+    "status": "illustrative assumptions, not market quotes"
+  },
+  "scenarios": [
+    {
+      "name": "Small",
+      "actual_vcpu_hours": 100,
+      "artifact_control_allocation": 75,
+      "support_hours": 1,
+      "subscription": 750,
+      "compute": 5.0,
+      "support": 125,
+      "direct_cost": 205.0,
+      "contribution": 545.0,
+      "contribution_percent": 72.7,
+      "cost_at_0_20_per_vcpu_hour": 220.0
+    },
+    {
+      "name": "Base",
+      "actual_vcpu_hours": 1000,
+      "artifact_control_allocation": 100,
+      "support_hours": 2,
+      "subscription": 1500,
+      "compute": 50.0,
+      "support": 250,
+      "direct_cost": 400.0,
+      "contribution": 1100.0,
+      "contribution_percent": 73.3,
+      "cost_at_0_20_per_vcpu_hour": 550.0
+    },
+    {
+      "name": "Heavy",
+      "actual_vcpu_hours": 10000,
+      "artifact_control_allocation": 250,
+      "support_hours": 8,
+      "subscription": 3000,
+      "compute": 500.0,
+      "support": 1000,
+      "direct_cost": 1750.0,
+      "contribution": 1250.0,
+      "contribution_percent": 41.7,
+      "cost_at_0_20_per_vcpu_hour": 3250.0
+    }
+  ],
+  "customer_scenarios": {
+    "loaded_hourly_cost": 125,
+    "one_day_hours": 8,
+    "diy_initial_hours": 40,
+    "diy_monthly_hours": 4,
+    "pilot_fee": 5000,
+    "pilot_adversary_hours": 16
+  },
+  "base_support_8h": {
+    "direct_cost": 1150,
+    "contribution": 350,
+    "percent": 23.3
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "prototypes/rust-worker/src/main.rs": {
+    "lines": 38,
+    "nonblank_lines": 38
+  },
+  "prototypes/go-worker/main.go": {
+    "lines": 59,
+    "nonblank_lines": 57
+  },
+  "prototypes/gosim-contract/adversary_test.go": {
+    "lines": 86,
+    "nonblank_lines": 83
+  }
+}

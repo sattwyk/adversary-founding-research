@@ -1,0 +1,19 @@
+{"time":"2026-11-03T10:40:04.160633176+05:30","level":"INFO","msg":"namespace enabled","component":"engine","session_id":"3f293c38bbb7e78f","type":"PID"}
+{"time":"2026-11-03T10:40:04.160731976+05:30","level":"INFO","msg":"namespace enabled","component":"engine","session_id":"3f293c38bbb7e78f","type":"NET"}
+{"time":"2026-11-03T10:40:04.160737376+05:30","level":"INFO","msg":"namespace enabled","component":"engine","session_id":"3f293c38bbb7e78f","type":"MNT"}
+{"time":"2026-11-03T10:40:04.160739376+05:30","level":"INFO","msg":"namespace enabled","component":"engine","session_id":"3f293c38bbb7e78f","type":"USER"}
+{"time":"2026-11-03T10:40:04.161095776+05:30","level":"INFO","msg":"starting session","component":"engine","session_id":"3f293c38bbb7e78f","binary":"/tmp/adversary-bbolt-worker","args":["write","/tmp/adversary-baseline/go.db","safe"],"rule_count":1,"namespaces":true,"seccomp":true}
+{"time":"2026-11-03T10:40:04.161186376+05:30","level":"INFO","msg":"state changed","component":"engine","session_id":"3f293c38bbb7e78f","state":"starting"}
+{"time":"2026-11-03T10:40:04.161197276+05:30","level":"INFO","msg":"seccomp filter installed","component":"engine","session_id":"3f293c38bbb7e78f","syscalls":[75]}
+{"time":"2026-11-03T10:40:04.178816376+05:30","level":"INFO","msg":"state changed","component":"engine","session_id":"3f293c38bbb7e78f","state":"running"}
+{"time":"2026-11-03T10:40:04.178865476+05:30","level":"INFO","msg":"target started","component":"engine","session_id":"3f293c38bbb7e78f","pid":23459,"listener_fd":8}
+{"time":"2026-11-03T10:40:04.181664676+05:30","level":"INFO","msg":"syscall intercepted","component":"engine","session_id":"3f293c38bbb7e78f","name":"fdatasync","pid":23459,"decision":"deny(input/output error)","path":"/tmp/adversary-baseline/go.db"}
+panic: input/output error
+
+goroutine 1 [running]:
+main.must(...)
+	/mnt/c/Users/sattw/Documents/Codex/2026-11-03/browser-plugin-browser-openai-bundled-what-5/outputs/prototypes/go-worker/main.go:10
+main.main()
+	/mnt/c/Users/sattw/Documents/Codex/2026-11-03/browser-plugin-browser-openai-bundled-what-5/outputs/prototypes/go-worker/main.go:21 +0x2db
+{"time":"2026-11-03T10:40:04.184381776+05:30","level":"INFO","msg":"state changed","component":"engine","session_id":"3f293c38bbb7e78f","state":"stopped"}
+{"time":"2026-11-03T10:40:04.184413076+05:30","level":"INFO","msg":"session completed","component":"engine","session_id":"3f293c38bbb7e78f","exit_code":0,"duration":23763700,"dropped_notifications":0}

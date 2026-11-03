@@ -1,0 +1,290 @@
+[
+  {
+    "repo": "foundationdb",
+    "path": "fdbrpc/sim2.cpp",
+    "hits": [
+      {
+        "line": 845,
+        "text": "843: #endif\n844: \n845: class SimpleFile : public IAsyncFile, public ReferenceCounted<SimpleFile> {\n846: public:\n847: \tstatic void init() {}\n848: \n849: \tStringRef getClassName() override { return \"SimpleFile\"_sr; }\n850: \n851: \tstatic bool should_poll() { return false; }\n852: \n853: \tstatic Future<Reference<IAsyncFile>> open(\n854: \t    std::string filename,\n855: \t    int flags,\n856: \t    int mode,\n857: \t    Reference<DiskParameters> diskParameters = makeReference<DiskParameters>(25000, 150000000),"
+      },
+      {
+        "line": 1005,
+        "text": "1003: \n1004: \t// Simulated sync does not actually do anything besides wait a random amount of time\n1005: \tFuture<Void> sync() override {\n1006: \t\tUID opId = deterministicRandom()->randomUniqueID();\n1007: \t\tif (randLog) {\n1008: \t\t\tfprintf(randLog,\n1009: \t\t\t        \"SFC1 %s %s %s\\n\",\n1010: \t\t\t        this->dbgId.shortString().c_str(),\n1011: \t\t\t        this->filename.c_str(),\n1012: \t\t\t        opId.shortString().c_str());\n1013: \t\t}\n1014: \n1015: \t\tif (this->delayOnWrite)\n1016: \t\t\tco_await waitUntilDiskReady(this->diskParameters, 0, true);\n1017: "
+      },
+      {
+        "line": 1938,
+        "text": "1936: \t\treturn result;\n1937: \t}\n1938: \tbool killMachine(Optional<Standalone<StringRef>> machineId,\n1939: \t                 KillType kt,\n1940: \t                 bool forceKill,\n1941: \t                 KillType* ktFinal) override {\n1942: \t\tauto ktOrig = kt;\n1943: \n1944: \t\tCODE_PROBE(true, \"Trying to killing a machine\", probe::context::sim2, probe::assert::simOnly);\n1945: \t\tCODE_PROBE(\n1946: \t\t    kt == KillType::KillInstantly, \"Trying to kill instantly\", probe::context::sim2, probe::assert::simOnly);\n1947: \t\tCODE_PROBE(kt == KillType::InjectFaults,\n1948: \t\t           \"Trying to kill by injecting faults\",\n1949: \t\t           probe::context::sim2,\n1950: \t\t           probe::assert::simOnly);"
+      }
+    ]
+  },
+  {
+    "repo": "tigerbeetle",
+    "path": "src/testing/storage.zig",
+    "hits": [
+      {
+        "line": 79,
+        "text": "77:         /// Chance out of 100 that a crash will corrupt a sector of a pending write's target,\n78:         /// if the target memory is within a faulty area of this replica.\n79:         crash_fault_probability: Ratio = Ratio.zero(),\n80: \n81:         /// Enable/disable automatic read/write faults.\n82:         /// Does not impact crash faults or manual faults.\n83:         fault_atlas: ?*const ClusterFaultAtlas = null,\n84: \n85:         /// Accessed by the Grid for extra verification of grid coherence.\n86:         grid_checker: ?*GridChecker = null,\n87: \n88:         iops_read_max: u64 = constants.iops_read_max,\n89:         iops_write_max: u64 = constants.iops_write_max,\n90:     };\n91: "
+      },
+      {
+        "line": 274,
+        "text": "272:     /// Cancel any currently in-progress reads/writes.\n273:     /// Corrupt the target sectors of any in-progress writes.\n274:     pub fn reset(storage: *Storage) void {\n275:         log.debug(\"Reset: {} pending reads, {} pending writes, {} pending next_ticks\", .{\n276:             storage.reads.count(),\n277:             storage.writes.count(),\n278:             storage.next_tick_queue.count(),\n279:         });\n280:         while (storage.writes.pop()) |write| {\n281:             if (storage.prng.chance(storage.options.crash_fault_probability)) {\n282:                 // Randomly corrupt one of the faulty sectors the operation targeted.\n283:                 // TODO: inject more realistic and varied storage faults as described above.\n284:                 const sectors = SectorRange.from_zone(write.zone, write.offset, write.buffer.len);\n285:                 storage.fault_sector(write.zone, sectors.random(&storage.prng));\n286:             }"
+      },
+      {
+        "line": 424,
+        "text": "422:     /// * Verifies that the read fits within the target sector.\n423:     /// * Verifies that the read targets sectors that have been written to.\n424:     pub fn read_sectors(\n425:         storage: *Storage,\n426:         callback: *const fn (read: *Storage.Read) void,\n427:         read: *Storage.Read,\n428:         buffer: []u8,\n429:         zone: vsr.Zone,\n430:         offset_in_zone: u64,\n431:     ) void {\n432:         zone.verify_iop(buffer, offset_in_zone);\n433:         assert(zone != .grid_padding);\n434: \n435:         switch (zone) {\n436:             .superblock,"
+      },
+      {
+        "line": 576,
+        "text": "574:     }\n575: \n576:     pub fn write_sectors(\n577:         storage: *Storage,\n578:         callback: *const fn (write: *Storage.Write) void,\n579:         write: *Storage.Write,\n580:         buffer: []const u8,\n581:         zone: vsr.Zone,\n582:         offset_in_zone: u64,\n583:     ) void {\n584:         zone.verify_iop(buffer, offset_in_zone);\n585:         assert(zone.offset(offset_in_zone) + buffer.len <= storage.memory.len);\n586:         maybe(zone == .grid_padding); // Padding is zeroed during format.\n587: \n588:         // Verify that there are no concurrent overlapping writes."
+      }
+    ]
+  },
+  {
+    "repo": "etcd",
+    "path": "tests/robustness/validate/validate.go",
+    "hits": [
+      {
+        "line": 32,
+        "text": "30: var ErrNotEmptyDatabase = errors.New(\"non empty database at start, required by model used for linearizability validation\")\n31: \n32: func ValidateAndReturnVisualize(lg *zap.Logger, cfg Config, reports []report.ClientReport, persistedRequests []model.EtcdRequest, timeout time.Duration) (result RobustnessResult) {\n33: \tresult.Assumptions = ResultFromError(checkValidationAssumptions(reports))\n34: \tif result.Assumptions.Error() != nil {\n35: \t\treturn result\n36: \t}\n37: \tlinearizableOperations, serializableOperations, operationsForVisualization := prepareAndCategorizeOperations(reports)\n38: \t// We are passing in the original reports and linearizableOperations with modified return time.\n39: \t// The reason is that linearizableOperations are those dedicated for linearization, which requires them to have returnTime set to infinity as required by pourcupine.\n40: \t// As for the report, the original report is used so the consumer doesn't need to track what patching was done or not.\n41: \tif len(persistedRequests) != 0 {\n42: \t\tlinearizableOperations = patchLinearizableOperations(linearizableOperations, reports, persistedRequests)\n43: \t}\n44: \tkeys := model.ModelKeys(linearizableOperations)"
+      },
+      {
+        "line": 114,
+        "text": "112: }\n113: \n114: func checkValidationAssumptions(reports []report.ClientReport) error {\n115: \terr := validateEmptyDatabaseAtStart(reports)\n116: \tif err != nil {\n117: \t\treturn err\n118: \t}\n119: \n120: \terr = validateNonConcurrentClientRequests(reports)\n121: \tif err != nil {\n122: \t\treturn err\n123: \t}\n124: \treturn nil\n125: }\n126: "
+      }
+    ]
+  },
+  {
+    "repo": "etcd",
+    "path": "tests/robustness/validate/patch_history.go",
+    "hits": [
+      {
+        "line": 34,
+        "text": "32: }\n33: \n34: func patchLinearizableOperations(operations []porcupine.Operation, reports []report.ClientReport, persistedRequests []model.EtcdRequest) []porcupine.Operation {\n35: \tputRevision := watchRevisions(reports)\n36: \tpersistedPutCount := countPersistedPuts(persistedRequests)\n37: \tclientPutCount := countClientPuts(reports)\n38: \n39: \tpersistedDeleteCount := countPersistedDeletes(persistedRequests)\n40: \tclientDeleteCount := countClientDeletes(reports)\n41: \n42: \tpersistedCompactCount := countPersistedCompacts(persistedRequests)\n43: \tclientCompactCount := countClientCompacts(reports)\n44: \n45: \tputReturnTime, delReturnTime, compactReturnTime := uniqueOperationReturnTime(operations, persistedRequests, clientPutCount, clientDeleteCount, clientCompactCount)\n46: "
+      }
+    ]
+  },
+  {
+    "repo": "turmoil",
+    "path": "crates/turmoil/src/host.rs",
+    "hits": [
+      {
+        "line": 185,
+        "text": "183:     }\n184: \n185:     pub(crate) fn tick(&mut self, duration: Duration) {\n186:         self.elapsed += duration\n187:     }\n188: \n189:     /// Set a new `Instant` for each iteration of the simulation. `elapsed` is\n190:     /// updated after each iteration via `tick()`, where as this value is\n191:     /// necessary to accurately calculate elapsed time while the software is\n192:     /// running.\n193:     ///\n194:     /// This is required to track logical time across host restarts as a single\n195:     /// `Instant` resets when the tokio runtime is recreated.\n196:     pub(crate) fn now(&mut self, now: Instant) {\n197:         self.now.replace(now);"
+      }
+    ]
+  },
+  {
+    "repo": "turmoil",
+    "path": "crates/turmoil-fs/src/lib.rs",
+    "hits": [
+      {
+        "line": 1104,
+        "text": "1102:     /// `sync_file`) but whose directory entry was not synced (via `sync_dir`).\n1103:     /// In POSIX, both are required for a file to survive a crash.\n1104:     pub fn crash(&mut self) {\n1105:         // Apply torn writes if block_size is configured.\n1106:         // Split-borrow: `apply_torn_writes` needs `&mut self.pending`\n1107:         // (and others) plus a separate `&mut rng`. Pulling rng out\n1108:         // first lets the helper take everything else as `&mut self`.\n1109:         if let Some(block_size) = self.block_size {\n1110:             // SAFETY: `self.rng` is disjoint from the fields\n1111:             // `apply_torn_writes` mutates (`pending`, `persisted_*`).\n1112:             // Single-threaded simulation; no aliasing.\n1113:             let rng_ptr: *mut dyn RngCore = &mut *self.rng;\n1114:             let rng = unsafe { &mut *rng_ptr };\n1115:             self.apply_torn_writes(block_size, rng);\n1116:         }"
+      },
+      {
+        "line": 417,
+        "text": "415:     /// This is useful for testing crash consistency - with a non-zero\n416:     /// probability, some writes may survive a crash even without fsync.\n417:     pub fn sync_probability(&mut self, value: f64) -> &mut Self {\n418:         assert!(\n419:             (0.0..=1.0).contains(&value),\n420:             \"sync_probability must be between 0.0 and 1.0\"\n421:         );\n422:         self.sync_probability = value;\n423:         self\n424:     }\n425: \n426:     /// Set the disk capacity in bytes per host.\n427:     ///\n428:     /// Default: None (unlimited).\n429:     ///"
+      },
+      {
+        "line": 365,
+        "text": "363: /// - `noatime`: true (access time not updated on reads)\n364: /// - `direct_io_alignment`: 512 (minimum kernel alignment for O_DIRECT)\n365: /// - `block_size`: None (writes are atomic, no torn writes)\n366: /// - `io_latency`: None (instant operations)\n367: /// - `page_cache`: None (no page cache simulation)\n368: #[derive(Debug, Clone)]\n369: pub struct FsConfig {\n370:     /// Probability that writes are randomly synced to durable storage (0.0 - 1.0)\n371:     pub(crate) sync_probability: f64,\n372:     /// Disk capacity in bytes (None = unlimited)\n373:     pub(crate) capacity: Option<u64>,\n374:     /// Probability of I/O errors (0.0 - 1.0)\n375:     pub(crate) io_error_probability: f64,\n376:     /// Probability of silent data corruption on reads (0.0 - 1.0)\n377:     pub(crate) corruption_probability: f64,"
+      }
+    ]
+  },
+  {
+    "repo": "madsim",
+    "path": "madsim/src/sim/fs.rs",
+    "hits": [
+      {
+        "line": 51,
+        "text": "49: \n50:     /// Simulate a power failure. All data that does not reach the disk will be lost.\n51:     pub fn power_fail(&self, _id: NodeId) {\n52:         // TODO\n53:     }\n54: \n55:     /// Get the size of given file.\n56:     pub fn get_file_size(&self, node: NodeId, path: impl AsRef<Path>) -> Result<u64> {\n57:         let path = path.as_ref();\n58:         let handle = self.handles.lock()[&node].clone();\n59:         let fs = handle.fs.lock();\n60:         let inode = fs\n61:             .get(path)\n62:             .ok_or_else(|| Error::new(ErrorKind::NotFound, format!(\"file not found: {path:?}\")))?;\n63:         Ok(inode.metadata().len())"
+      },
+      {
+        "line": 219,
+        "text": "217:     /// Attempts to sync all OS-internal metadata to disk.\n218:     #[instrument]\n219:     pub async fn sync_all(&self) -> Result<()> {\n220:         // TODO: random delay\n221:         Ok(())\n222:     }\n223: \n224:     /// Queries metadata about the underlying file.\n225:     #[instrument]\n226:     pub async fn metadata(&self) -> Result<Metadata> {\n227:         Ok(self.inode.metadata())\n228:     }\n229: }\n230: \n231: /// Read the entire contents of a file into a bytes vector."
+      }
+    ]
+  },
+  {
+    "repo": "risingwave",
+    "path": "src/tests/simulation/src/cluster.rs",
+    "hits": [
+      {
+        "line": 403,
+        "text": "401:     /// This function should be called exactly once in a test.\n402:     #[cfg_or_panic(madsim)]\n403:     pub async fn start(conf: Configuration) -> Result<Self> {\n404:         use madsim::net::ipvs::*;\n405: \n406:         let handle = madsim::runtime::Handle::current();\n407:         println!(\"seed = {}\", handle.seed());\n408:         println!(\"{:#?}\", conf);\n409: \n410:         // TODO: support mutil meta nodes\n411:         assert_eq!(conf.meta_nodes, 1);\n412: \n413:         // setup DNS and load balance\n414:         let net = madsim::net::NetSim::current();\n415:         for i in 1..=conf.meta_nodes {"
+      },
+      {
+        "line": 762,
+        "text": "760:     }\n761: \n762:     /// Generate a list of random worker nodes to kill by `opts`, then call `kill_nodes` to kill and\n763:     /// restart them.\n764:     pub async fn kill_node(&self, opts: &KillOpts) {\n765:         let mut nodes = vec![];\n766:         if opts.kill_meta {\n767:             let rand = rand::rng().random_range(0..3);\n768:             for i in 1..=self.config.meta_nodes {\n769:                 match rand {\n770:                     0 => break,                                     // no killed\n771:                     1 => {}                                         // all killed\n772:                     _ if !rand::rng().random_bool(0.5) => continue, // random killed\n773:                     _ => {}\n774:                 }"
+      },
+      {
+        "line": 763,
+        "text": "761: \n762:     /// Generate a list of random worker nodes to kill by `opts`, then call `kill_nodes` to kill and\n763:     /// restart them.\n764:     pub async fn kill_node(&self, opts: &KillOpts) {\n765:         let mut nodes = vec![];\n766:         if opts.kill_meta {\n767:             let rand = rand::rng().random_range(0..3);\n768:             for i in 1..=self.config.meta_nodes {\n769:                 match rand {\n770:                     0 => break,                                     // no killed\n771:                     1 => {}                                         // all killed\n772:                     _ if !rand::rng().random_bool(0.5) => continue, // random killed\n773:                     _ => {}\n774:                 }\n775:                 nodes.push(format!(\"meta-{}\", i));"
+      }
+    ]
+  },
+  {
+    "repo": "shuttle",
+    "path": "shuttle-engine/src/scheduler/mod.rs",
+    "hits": [
+      {
+        "line": 75,
+        "text": "73: /// executor calls `new_execution()` to inform the scheduler that a new execution is starting. Then,\n74: /// for each scheduling decision, the executor calls `next_task` to determine which task to run.\n75: pub trait Scheduler {\n76:     /// Inform the `Scheduler` that a new execution is about to begin. If this function returns\n77:     /// None, the test will end rather than performing another execution. If it returns\n78:     /// `Some(schedule)`, the returned `Schedule` can be used to initialize a `ReplayScheduler` for\n79:     /// deterministic replay.\n80:     fn new_execution(&mut self) -> Option<Schedule>;\n81: \n82:     /// Decide which task to run next, given a list of runnable tasks and the currently running\n83:     /// tasks. This method returns `Some(task)` where `task` is the runnable task to be executed\n84:     /// next; it may also return `None`, indicating that the execution engine should stop exploring\n85:     /// the current schedule.\n86:     ///\n87:     /// `is_yielding` is a hint to the scheduler that `current_task` has asked to yield (e.g.,"
+      },
+      {
+        "line": 92,
+        "text": "90:     /// The list of runnable tasks is guaranteed to be non-empty. If `current_task` is `None`, the\n91:     /// execution has not yet begun.\n92:     fn next_task(\n93:         &mut self,\n94:         runnable_tasks: &[&Task],\n95:         current_task: Option<TaskId>,\n96:         is_yielding: bool,\n97:     ) -> Option<TaskId>;\n98: \n99:     /// Choose the next u64 value to return to the currently running task.\n100:     fn next_u64(&mut self) -> u64;\n101: }\n102: \n103: impl Scheduler for Box<dyn Scheduler + Send> {\n104:     fn new_execution(&mut self) -> Option<Schedule> {"
+      }
+    ]
+  },
+  {
+    "repo": "loom",
+    "path": "src/rt/execution.rs",
+    "hits": [
+      {
+        "line": 51,
+        "text": "49:         max_threads: usize,\n50:         max_branches: usize,\n51:         preemption_bound: Option<usize>,\n52:         exploring: bool,\n53:     ) -> Execution {\n54:         let id = Id::new();\n55:         let threads = thread::Set::new(id, max_threads);\n56: \n57:         let preemption_bound =\n58:             preemption_bound.map(|bound| bound.try_into().expect(\"preemption_bound too big\"));\n59: \n60:         Execution {\n61:             id,\n62:             path: Path::new(max_branches, preemption_bound, exploring),\n63:             threads,"
+      }
+    ]
+  },
+  {
+    "repo": "gosim",
+    "path": "internal/translate/go.go",
+    "hits": []
+  },
+  {
+    "repo": "gosim",
+    "path": "internal/simulation/fs/filesystem.go",
+    "hits": [
+      {
+        "line": 21,
+        "text": "19: // a slice around with the contents of the file.\n20: //\n21: // Only read-only mmaps are supported since we do not get notified on writes.\n22: // That is enough to make go.etcd.io/bbolt work.\n23: type Mmap struct {\n24: \tInode int\n25: \tData  syscallabi.ByteSliceView\n26: }\n27: \n28: // next:\n29: // - delete on test end, somehow (but pool isn't shared between tests? maybe we could/should make it?)\n30: // - think about where we should invoke GC and why that's safe\n31: // -- eg. when we create/apply multiple ops. should there be an API for doing that atomically?\n32: \n33: // after a crash, iterate over all files and check for zeroes and if so, delete (optimize later: track orphans?)"
+      },
+      {
+        "line": 707,
+        "text": "705: }\n706: \n707: func (fs *Filesystem) Sync(inode int) {\n708: \tfs.mu.Lock()\n709: \tdefer fs.mu.Unlock()\n710: \n711: \tfs.flushInode(inode)\n712: }\n713: \n714: func (fs *Filesystem) Getdirinode(dirInode int, path string) (int, error) {\n715: \t// For chdir\n716: \tfs.mu.Lock()\n717: \tdefer fs.mu.Unlock()\n718: \n719: \tdirInode, _, err := fs.walkpath(dirInode, path, false)"
+      },
+      {
+        "line": 521,
+        "text": "519: }\n520: \n521: func (fs *Filesystem) CrashClone(partialDisk bool) *Filesystem {\n522: \tfs.mu.Lock()\n523: \tdefer fs.mu.Unlock()\n524: \n525: \t// XXX: think about if we do the right thing with the next inode number\n526: \n527: \tpersisted := fs.persisted.clone()\n528: \tif partialDisk {\n529: \t\tpickedOps := fs.pendingOps.randomCrashSubset()\n530: \t\tfor _, op := range pickedOps {\n531: \t\t\top.apply(persisted, nilgc{}) // XXX: jank think about gc\n532: \t\t}\n533: \t}"
+      }
+    ]
+  },
+  {
+    "repo": "gosim",
+    "path": "internal/simulation/fs/pendingops.go",
+    "hits": [
+      {
+        "line": 42,
+        "text": "40: \n41: const (\n42: \tdepStoreAs depKind = iota\n43: \tdepStoreAsAndDependsOn\n44: \tdepDependsOn\n45: )\n46: \n47: func (k depKind) isStoreAs() bool {\n48: \treturn k != depDependsOn\n49: }\n50: \n51: func (k depKind) isDependsOn() bool {\n52: \treturn k != depStoreAs\n53: }\n54: "
+      }
+    ]
+  },
+  {
+    "repo": "stateright",
+    "path": "src/lib.rs",
+    "hits": [
+      {
+        "line": 158,
+        "text": "156: ///\n157: /// You can instantiate a model [`CheckerBuilder`] by calling [`Model::checker`].\n158: pub trait Model: Sized {\n159:     /// The type of state upon which this model operates.\n160:     type State;\n161: \n162:     /// The type of action that transitions between states.\n163:     type Action;\n164: \n165:     /// Returns the initial possible states.\n166:     ///\n167:     /// Note: The order of init states must be deterministic so that the action indices (the 0th\n168:     /// index is for the init state) based `Path` construction can work properly.\n169:     fn init_states(&self) -> Vec<Self::State>;\n170: "
+      },
+      {
+        "line": 51,
+        "text": "49: //!     type Action = Slide;\n50: //!\n51: //!     fn init_states(&self) -> Vec<Self::State> {\n52: //!         vec![self.0]\n53: //!     }\n54: //!\n55: //!     fn actions(&self, _state: &Self::State, actions: &mut Vec<Self::Action>) {\n56: //!         actions.append(&mut vec![\n57: //!             Slide::Down, Slide::Up, Slide::Right, Slide::Left\n58: //!         ]);\n59: //!     }\n60: //!\n61: //!     fn next_state(&self, last_state: &Self::State, action: Self::Action) -> Option<Self::State> {\n62: //!         let empty = last_state.iter().position(|x| *x == 0).unwrap();\n63: //!         let empty_y = empty / 3;"
+      },
+      {
+        "line": 61,
+        "text": "59: //!     }\n60: //!\n61: //!     fn next_state(&self, last_state: &Self::State, action: Self::Action) -> Option<Self::State> {\n62: //!         let empty = last_state.iter().position(|x| *x == 0).unwrap();\n63: //!         let empty_y = empty / 3;\n64: //!         let empty_x = empty % 3;\n65: //!         let maybe_from = match action {\n66: //!             Slide::Down  if empty_y > 0 => Some(empty - 3), // above\n67: //!             Slide::Up    if empty_y < 2 => Some(empty + 3), // below\n68: //!             Slide::Right if empty_x > 0 => Some(empty - 1), // left\n69: //!             Slide::Left  if empty_x < 2 => Some(empty + 1), // right\n70: //!             _ => None\n71: //!         };\n72: //!         maybe_from.map(|from| {\n73: //!             let mut next_state = *last_state;"
+      },
+      {
+        "line": 80,
+        "text": "78: //!     }\n79: //!\n80: //!     fn properties(&self) -> Vec<Property<Self>> {\n81: //!         vec![Property::<Self>::sometimes(\"solved\", |_, state| {\n82: //!             let solved = [0, 1, 2,\n83: //!                           3, 4, 5,\n84: //!                           6, 7, 8];\n85: //!             state == &solved\n86: //!         })]\n87: //!     }\n88: //! }\n89: //! let checker = Puzzle([1, 4, 2,\n90: //!                       3, 5, 8,\n91: //!                       6, 7, 0])\n92: //!     .checker().spawn_bfs().join();"
+      }
+    ]
+  },
+  {
+    "repo": "kani",
+    "path": "library/kani/src/lib.rs",
+    "hits": []
+  },
+  {
+    "repo": "porcupine",
+    "path": "model.go",
+    "hits": [
+      {
+        "line": 19,
+        "text": "17: // operation with interval [10, 20] is concurrent with another operation with\n18: // interval [20, 30].\n19: type Operation struct {\n20: \tClientId int // optional, unless you want a visualization; zero-indexed\n21: \tInput    interface{}\n22: \tCall     int64 // invocation timestamp\n23: \tOutput   interface{}\n24: \tReturn   int64 // response timestamp\n25: \t// Metadata contains arbitrary metadata associated with the operation.\n26: \t// It is not used for linearizability checking but can be used for visualization.\n27: \tMetadata interface{}\n28: \t_        struct{} // disallow positional literals, for extensibility\n29: }\n30: \n31: // Interpreting the interval [Call, Return] as a closed interval is the only"
+      },
+      {
+        "line": 101,
+        "text": "99: //\n100: // [test code]: https://github.com/anishathalye/porcupine/blob/master/porcupine_test.go\n101: type Model struct {\n102: \t// Partition functions, such that a history is linearizable if and only\n103: \t// if each partition is linearizable. If left nil, this package will\n104: \t// skip partitioning.\n105: \tPartition      func(history []Operation) [][]Operation\n106: \tPartitionEvent func(history []Event) [][]Event\n107: \t// Initial state of the system.\n108: \tInit func() interface{}\n109: \t// Step function for the system. Returns whether or not the system\n110: \t// could take this step with the given inputs and outputs and also\n111: \t// returns the new state. This function must be a pure function: it\n112: \t// cannot mutate the given state.\n113: \tStep func(state interface{}, input interface{}, output interface{}) (bool, interface{})"
+      },
+      {
+        "line": 367,
+        "text": "365: // interpret an Unknown result as Ok (i.e., the tool didn't find a\n366: // linearizability violation within the given timeout).\n367: type CheckResult string\n368: \n369: const (\n370: \tUnknown CheckResult = \"Unknown\" // timed out\n371: \tOk      CheckResult = \"Ok\"\n372: \tIllegal CheckResult = \"Illegal\"\n373: )"
+      }
+    ]
+  },
+  {
+    "repo": "elle",
+    "path": "src/elle/core.clj",
+    "hits": [
+      {
+        "line": 519,
+        "text": "517:        (render-cycle-explanation cycle-explainer pair-explainer)))\n518: \n519: (defn check-\n520:   \"Meat of the checker. Takes an analysis function and a history; returns an map\n521:   of:\n522: \n523:       {:graph     The computed graph\n524:        :explainer The explainer for that graph\n525:        :cycles    A list of cycles we found\n526:        :sccs      A set of strongly connected components\n527:        :anomalies Any anomalies we found during this analysis.}\"\n528:   [analyze-fn history]\n529:   (let [history           (h/client-ops history)\n530:         {:keys [anomalies explainer graph]} (analyze-fn history)\n531:         sccs              (g/strongly-connected-components graph)"
+      },
+      {
+        "line": 445,
+        "text": "443:             (str/join \"\\n\"))))\n444: \n445: (defn explain-cycle-pair-data\n446:   \"Takes a pair explainer and a pair of ops, and constructs a data structure\n447:   explaining why a precedes b.\"\n448:   [pair-explainer [a b]]\n449:   (or (explain-pair-data pair-explainer a b)\n450:       (throw (IllegalStateException.\n451:                (str \"Explainer\\n\"\n452:                     (with-out-str (pprint pair-explainer))\n453:                     \"\\nwas unable to explain the relationship\"\n454:                     \" between \" (pr-str a)\n455:                     \" and \" (pr-str b))))))\n456: \n457: (defn explain-cycle-ops"
+      }
+    ]
+  },
+  {
+    "repo": "jepsen",
+    "path": "jepsen/src/jepsen/core.clj",
+    "hits": [
+      {
+        "line": 352,
+        "text": "350:     (update :generator util/forgettable)))\n351: \n352: (defn run!\n353:   \"Runs a test. Tests are maps containing\n354: \n355:     :nodes      A sequence of string node names involved in the test\n356:     :concurrency  (optional) How many processes to run concurrently\n357:     :ssh        SSH credential information: a map containing...\n358:       :username           The username to connect with   (root)\n359:       :password           The password to use\n360:       :sudo-password      The password to use for sudo, if needed\n361:       :port               SSH listening port (22)\n362:       :private-key-path   A path to an SSH identity file (~/.ssh/id_rsa)\n363:       :strict-host-key-checking  Whether or not to verify host keys\n364:       :dummy?             Runs test with no SSH connections."
+      },
+      {
+        "line": 236,
+        "text": "234:             @nf#))))))\n235: \n236: (defn run-case!\n237:   \"Takes a test with a store handle. Spawns nemesis and clients and runs the\n238:   generator. Returns test with no :generator and a completed :history.\"\n239:   [test]\n240:   (with-client+nemesis-setup-teardown [test test]\n241:     (store/with-history! [test test]\n242:       (gen.interpreter/run! test))))\n243: \n244: (defn analyze!\n245:   \"After running the test and obtaining a history, we perform some\n246:   post-processing on the history, run the checker, and write the test to disk\n247:   again. Takes a test map. Returns a new test with results.\"\n248:   [test]"
+      }
+    ]
+  },
+  {
+    "repo": "redb",
+    "path": "src/db.rs",
+    "hits": [
+      {
+        "line": 72,
+        "text": "70: /// 3) All inputs return [`BackendError::Unsupported`]. Only the `ExclusiveWriter` concurrency\n71: ///    mode will work, and redb will log a warning on open if logging is enabled.\n72: pub trait StorageBackend: 'static + Debug + Send + Sync {\n73:     /// Gets the current length of the storage.\n74:     fn len(&self) -> core::result::Result<u64, io::Error>;\n75: \n76:     /// Reads the specified array of bytes from the storage.\n77:     ///\n78:     /// If `out.len()` + `offset` exceeds the length of the storage an appropriate `Error` must be returned.\n79:     fn read(&self, offset: u64, out: &mut [u8]) -> core::result::Result<(), io::Error>;\n80: \n81:     /// Sets the length of the storage.\n82:     ///\n83:     /// New positions in the storage must be initialized to zero.\n84:     fn set_len(&self, len: u64) -> core::result::Result<(), io::Error>;"
+      }
+    ]
+  },
+  {
+    "repo": "bbolt",
+    "path": "tx.go",
+    "hits": [
+      {
+        "line": 520,
+        "text": "518: \n519: // write writes any dirty pages to disk.\n520: func (tx *Tx) write() error {\n521: \t// Sort pages by id.\n522: \tlg := tx.db.Logger()\n523: \tpages := make(common.Pages, 0, len(tx.pages))\n524: \tfor _, p := range tx.pages {\n525: \t\tpages = append(pages, p)\n526: \t}\n527: \t// Clear out page cache early.\n528: \ttx.pages = make(map[common.Pgid]*common.Page)\n529: \tsort.Sort(pages)\n530: \n531: \t// Write pages to disk in order.\n532: \tfor _, p := range pages {"
+      },
+      {
+        "line": 595,
+        "text": "593: \n594: // writeMeta writes the meta to the disk.\n595: func (tx *Tx) writeMeta() error {\n596: \t// gofail: var beforeWriteMetaError string\n597: \t// return errors.New(beforeWriteMetaError)\n598: \n599: \t// Create a temporary buffer for the meta page.\n600: \tlg := tx.db.Logger()\n601: \tbuf := make([]byte, tx.db.pageSize)\n602: \tp := tx.db.pageInBuffer(buf, 0)\n603: \ttx.meta.Write(p)\n604: \n605: \t// Write the meta page to file.\n606: \ttx.db.metalock.Lock()\n607: \tif _, err := tx.db.ops.writeAt(buf, int64(p.Id())*int64(tx.db.pageSize)); err != nil {"
+      }
+    ]
+  },
+  {
+    "repo": "faultbox",
+    "path": "internal/engine/session.go",
+    "hits": [
+      {
+        "line": 344,
+        "text": "342: // Run launches the target via the unified shim path.\n343: // Platform-specific implementation in launch_linux.go / launch_other.go.\n344: func (s *Session) Run(ctx context.Context) (*Result, error) {\n345: \treturn s.launch(ctx)\n346: }\n347: \n348: // SetDynamicFaultRules replaces the dynamic fault rules for the session.\n349: // These rules are checked by the notification loop alongside static rules.\n350: //\n351: // Nil-safe on purpose: mock services and container services started\n352: // with seccomp=False register no underlying *Session. Callers used to\n353: // race ahead and dereference a nil receiver here (the customer #75.2 in\n354: // v0.11.1 \u2014 a fault_matrix row targeting a mock panicked the whole\n355: // suite). Guard at the method level so any future caller that forgets\n356: // the mock check degrades gracefully rather than crashing."
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+   Compiling libc v0.2.191
+   Compiling redb v4.4.0
+   Compiling adversary-redb-probe v0.1.0 (/mnt/c/Users/sattw/Documents/Codex/2026-11-03/browser-plugin-browser-openai-bundled-what-5/outputs/prototypes/rust-worker)
+    Finished `release` profile [optimized] target(s) in 17.36s
+{"language": "rust", "mode": "safe", "seconds": 0.381, "native_violations": 0, "native_runs": 10, "effects": 8, "writes": 6, "syncs": 2, "unique_images": 12, "pre_ack_violations": 0, "post_ack_violations": 0}
+{"language": "rust", "mode": "unsafe", "seconds": 0.381, "native_violations": 10, "native_runs": 10, "effects": 2, "writes": 1, "syncs": 1, "unique_images": 3, "pre_ack_violations": 0, "post_ack_violations": 1}
+{"language": "go", "mode": "safe", "seconds": 0.153, "native_violations": 0, "native_runs": 10, "effects": 5, "writes": 3, "syncs": 2, "unique_images": 6, "pre_ack_violations": 0, "post_ack_violations": 0}
+{"language": "go", "mode": "unsafe", "seconds": 0.153, "native_violations": 0, "native_runs": 10, "effects": 3, "writes": 3, "syncs": 0, "unique_images": 8, "pre_ack_violations": 1, "post_ack_violations": 1}
+test_empty_or_truncated_trace_rejected (test_fidelity.Fidelity.test_empty_or_truncated_trace_rejected) ... ok
+test_synced_data_never_erased (test_fidelity.Fidelity.test_synced_data_never_erased) ... ok
+test_unsynced_durability_detected_but_pending_allowed (test_fidelity.Fidelity.test_unsynced_durability_detected_but_pending_allowed) ... ok
+test_writable_shared_mapping_rejected (test_fidelity.Fidelity.test_writable_shared_mapping_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK
+=== RUN   TestSchedulingObservation
+    probe_test.go:25: 50 identical workloads, distinct receive orders=50
+--- PASS: TestSchedulingObservation (0.00s)
+PASS
+ok  	adversary/synctest-probe	0.006s
+Results: /tmp/adversary-repro-sUSTbRyK/results

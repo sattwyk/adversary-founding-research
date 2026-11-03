@@ -1,0 +1,11 @@
+[package]
+name = "redb-adapter"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[dependencies]
+adversary-sdk = { path = "../../crates/sdk" }
+serde_json.workspace = true
+redb = "=4.4.0"

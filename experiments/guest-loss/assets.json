@@ -1,0 +1,22 @@
+[
+  {
+    "url": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/netboot/vmlinuz-virt",
+    "sha256": "17fbd3efd16f2e7cb1b945f06423b37399ba7d5ac8cdd3665e7f13f363500e85",
+    "bytes": 12641280
+  },
+  {
+    "url": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/netboot/initramfs-virt",
+    "sha256": "41d55a3fd650c99f5fa2a9dfed1eff3b441186831fd4f8d2223f717d8a28217d",
+    "bytes": 9659422
+  },
+  {
+    "url": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/netboot/config-6.18.58-0-virt",
+    "sha256": "aea855e9e485bd68db9dd9a01a787f67d9a0cd10c30b3be835e916b1d25968d8",
+    "bytes": 152061
+  },
+  {
+    "url": "https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/netboot/modloop-virt",
+    "sha256": "16f3a2470f538f529c475134103e83321619e6d8e2b0367beb4a758304449ffe",
+    "bytes": 22982656
+  }
+]

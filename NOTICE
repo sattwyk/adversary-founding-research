@@ -1,0 +1,4 @@
+Adversary development preview
+Copyright 2026 Adversary contributors.
+
+No third-party source implementation or boot binaries are vendored. Dependencies retain their original licenses. The experimental asset manifest refers to separately downloaded Alpine Linux/QEMU-related materials and does not relicense them.

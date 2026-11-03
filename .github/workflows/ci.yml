@@ -1,0 +1,37 @@
+name: native-recovery
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, verified 2026-11-03
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6, verified 2026-11-03
+        with:
+          go-version: '1.26.4'
+          cache: false
+      - name: Rust toolchain
+        run: |
+          rustup toolchain install 1.97.1 --profile minimal --component rustfmt --component clippy
+          rustup default 1.97.1
+      - run: bash scripts/check.sh
+  rust-minimum:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - run: rustup toolchain install 1.90.0 --profile minimal
+      - run: cargo +1.90.0 test --workspace --locked
+  go-minimum:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16
+        with:
+          go-version: '1.23.2'
+          cache: false
+      - run: cd sdk/go && go test -race ./...
+      - run: cd examples/bbolt-adapter && go test ./...

@@ -1,0 +1,5 @@
+/target/
+/.adversary/
+/runs/
+/work/
+*.db
